@@ -29,8 +29,8 @@ int main(int argc, char* argv[])
 {
     // Initialization
     //--------------------------------------------------------------------------------------
-    int screenWidth = 1860;
-    int screenHeight = 980;  //change screen size so the critters can move around better
+    int screenWidth = 800;
+    int screenHeight = 450;  //change screen size so the critters can move around better
 
     InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window");
 
@@ -43,7 +43,7 @@ int main(int argc, char* argv[])
     Critter critters[1000]; 
 
     // create some critters
-    const int CRITTER_COUNT = 1000; //was 50 just making it a large number for testing //made it max possible to better test out performance
+    const int CRITTER_COUNT = 50; //was 50 just making it a large number for testing //made it max possible to better test out performance
     const int MAX_VELOCITY = 80;
 
     for (int i = 0; i < CRITTER_COUNT; i++)
