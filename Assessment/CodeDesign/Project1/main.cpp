@@ -34,13 +34,13 @@ int main(int argc, char* argv[])
 
     InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window");
 
-    //SetTargetFPS(60);
+    
     //--------------------------------------------------------------------------------------
 
     srand(time(NULL));
 
 
-    Critter critters[1000]; 
+    Critter critters[50]; 
 
     // create some critters
     const int CRITTER_COUNT = 50; //was 50 just making it a large number for testing //made it max possible to better test out performance
@@ -60,13 +60,16 @@ int main(int argc, char* argv[])
             12, "res/10.png");
     }
 
-
+    //make destroyer critter
     Critter destroyer;
+    //Creat a random direction vector for the velocity
     Vector2 velocity = { -100 + (rand() % 200), -100 + (rand() % 200) };
+    // normalize and scale by a random speed
     velocity = Vector2Scale(Vector2Normalize(velocity), MAX_VELOCITY);
+    //spawn destroyer at random position 
     destroyer.Init(Vector2{ (float)(screenWidth >> 1), (float)(screenHeight >> 1) }, velocity, 20, "res/9.png");
 
-    float timer = 1;
+    float timer = 1; // wait are these used for ???
     Vector2 nextSpawnPos = destroyer.GetPosition();
 
     // Main game loop
@@ -81,7 +84,9 @@ int main(int argc, char* argv[])
 
         // update the destroyer
         destroyer.Update(delta);
-        // check each critter against screen bounds
+        // check each critter against screen bounds 
+        //is this really best way to check collision with the screen
+        //we could make this a function for the Critter class it clutters up the loop fucntion 
         if (destroyer.GetX() < 0) {
             destroyer.SetX(0);
             destroyer.SetVelocity(Vector2{ -destroyer.GetVelocity().x, destroyer.GetVelocity().y });
@@ -106,6 +111,7 @@ int main(int argc, char* argv[])
             critters[i].Update(delta);
 
             // check each critter against screen bounds
+            //again make this a function critter.CheckCollision()
             if (critters[i].GetX() < 0) {
                 critters[i].SetX(0);
                 critters[i].SetVelocity(Vector2{ -critters[i].GetVelocity().x, critters[i].GetVelocity().y });
@@ -125,11 +131,12 @@ int main(int argc, char* argv[])
 
             // kill any critter touching the destroyer
             // simple circle-to-circle collision check
+
             float dist = Vector2Distance(critters[i].GetPosition(), destroyer.GetPosition());
             if (dist < critters[i].GetRadius() + destroyer.GetRadius())
             {
                 critters[i].Destroy();
-                // this would be the perfect time to put the critter into an object pool
+                // this would be the perfect time to put the critter into an object pool //noted
             }
         }
                 
@@ -178,7 +185,7 @@ int main(int argc, char* argv[])
                     // get a position behind the destroyer, and far enough away that the critter won't bump into it again
                     Vector2 pos = destroyer.GetPosition();
                     pos = Vector2Add(pos, Vector2Scale(normal, -50));
-                    // its pretty ineficient to keep reloading textures. ...if only there was something else we could do
+                    // its pretty ineficient to keep reloading textures. ...if only there was something else we could do // good to know //lmao could we just do that dumb ass thing where we hand it off screen or what ever????
                     critters[i].Init(pos, Vector2Scale(normal, -MAX_VELOCITY), 12, "res/10.png");
                     break;
                 }
@@ -203,7 +210,7 @@ int main(int argc, char* argv[])
         destroyer.Draw();
 
         DrawFPS(10, 10);
-        //DrawText("Congrats! You created your first window!", 190, 200, 20, LIGHTGRAY);
+        
 
         EndDrawing();
         //----------------------------------------------------------------------------------
