@@ -1,14 +1,4 @@
-/*******************************************************************************************
-*
-*   raylib [core] example - Basic window
-*
-*   Welcome to raylib!
-*
-*   To test examples, just press F6 and execute raylib_compile_execute script
-*   Note that compiled executable is placed in the same folder as .c file
-*
-*   You can find all basic examples on C:\raylib\raylib\examples folder or
-*   raylib official webpage: www.raylib.com
+/*
 *
 *   Enjoy using raylib. :)
 *
@@ -23,7 +13,7 @@
 #include "raymath.h"
 #include <random>
 #include <time.h>
-#include "Critter.h"
+#include "Game.h"
 
 int main(int argc, char* argv[])
 {
@@ -40,10 +30,10 @@ int main(int argc, char* argv[])
     srand(time(NULL));
 
 
-    Critter critters[2]; 
+    Critter critters[50]; 
 
     // create some critters
-    const int CRITTER_COUNT = 2; //was 50 just making it a large number for testing //made it max possible to better test out performance
+    const int CRITTER_COUNT = 50; //was 50 just making it a large number for testing //made it max possible to better test out performance
     const int MAX_VELOCITY = 80;
 
     for (int i = 0; i < CRITTER_COUNT; i++)
