@@ -9,11 +9,11 @@
 *
 ********************************************************************************************/
 
+#include "Critter.h"
 #include "raylib.h"
 #include "raymath.h"
 #include <random>
 #include <time.h>
-#include "Game.h"
 
 int main(int argc, char* argv[])
 {
@@ -22,7 +22,7 @@ int main(int argc, char* argv[])
     int screenWidth = 800;
     int screenHeight = 450;  //change screen size so the critters can move around better
 
-    InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window");
+    InitWindow(screenWidth, screenHeight, "AHHAHAHAHAHAHAHA GOOD LUCK WE ARE FAILING AHAHAHHA");
 
     
     //--------------------------------------------------------------------------------------
@@ -62,6 +62,8 @@ int main(int argc, char* argv[])
     float timer = 1; // wait are these used for ???
     Vector2 nextSpawnPos = destroyer.GetPosition();
 
+
+
     // Main game loop
     while (!WindowShouldClose())    // Detect window close button or ESC key
     {
@@ -77,57 +79,63 @@ int main(int argc, char* argv[])
         // check each critter against screen bounds 
         //is this really best way to check collision with the screen
         //we could make this a function for the Critter class it clutters up the loop fucntion 
-        if (destroyer.GetX() < 0) {
-            destroyer.SetX(0);
-            destroyer.SetVelocity(Vector2{ -destroyer.GetVelocity().x, destroyer.GetVelocity().y });
-        }
-        if (destroyer.GetX() > screenWidth) {
-            destroyer.SetX(screenWidth);
-            destroyer.SetVelocity(Vector2{ -destroyer.GetVelocity().x, destroyer.GetVelocity().y });
-        }
-        if (destroyer.GetY() < 0) {
-            destroyer.SetY(0);
-            destroyer.SetVelocity(Vector2{ destroyer.GetVelocity().x, -destroyer.GetVelocity().y });
-        }
-        if (destroyer.GetY() > screenHeight) {
-            destroyer.SetY(screenHeight);
-            destroyer.SetVelocity(Vector2{ destroyer.GetVelocity().x, -destroyer.GetVelocity().y });
-        }
+        //if (destroyer.GetX() < 0) {
+        //    destroyer.SetX(0);
+        //    destroyer.SetVelocity(Vector2{ -destroyer.GetVelocity().x, destroyer.GetVelocity().y });
+        //}            
+        //if (destroyer.GetX() > screenWidth) {
+        //    destroyer.SetX(screenWidth);
+        //    destroyer.SetVelocity(Vector2{ -destroyer.GetVelocity().x, destroyer.GetVelocity().y });
+        //}            
+        //if (destroyer.GetY() < 0) {
+        //    destroyer.SetY(0);
+        //    destroyer.SetVelocity(Vector2{ destroyer.GetVelocity().x, -destroyer.GetVelocity().y });
+        //}            
+        //if (destroyer.GetY() > screenHeight) {
+        //    destroyer.SetY(screenHeight);
+        //    destroyer.SetVelocity(Vector2{ destroyer.GetVelocity().x, -destroyer.GetVelocity().y });
+        //}
+
+        destroyer.CheckCollision(screenHeight, screenWidth);
 
         // update the critters
         // (dirty flags will be cleared during update)
         for (int i = 0; i < CRITTER_COUNT; i++)
         {
             critters[i].Update(delta);
+        
+           
 
-            // check each critter against screen bounds
-            //again make this a function critter.CheckCollision()
-            if (critters[i].GetX() < 0) {
-                critters[i].SetX(0);
-                critters[i].SetVelocity(Vector2{ -critters[i].GetVelocity().x, critters[i].GetVelocity().y });
-            }
-            if (critters[i].GetX() > screenWidth) {
-                critters[i].SetX(screenWidth);
-                critters[i].SetVelocity(Vector2{ -critters[i].GetVelocity().x, critters[i].GetVelocity().y });
-            }
-            if (critters[i].GetY() < 0) {
-                critters[i].SetY(0);
-                critters[i].SetVelocity(Vector2{ critters[i].GetVelocity().x, -critters[i].GetVelocity().y });
-            }
-            if (critters[i].GetY() > screenHeight) {
-                critters[i].SetY(screenHeight);
-                critters[i].SetVelocity(Vector2{ critters[i].GetVelocity().x, -critters[i].GetVelocity().y });
-            }
 
-            // kill any critter touching the destroyer
-            // simple circle-to-circle collision check
+                // check each critter against screen bounds
+                //again make this a function critter.CheckCollision()
+                //if (critters[i].GetX() < 0) {
+                //    critters[i].SetX(0);
+                //    critters[i].SetVelocity(Vector2{ -critters[i].GetVelocity().x, critters[i].GetVelocity().y });
+                //}
+                //if (critters[i].GetX() > screenWidth) {
+                //    critters[i].SetX(screenWidth);
+                //    critters[i].SetVelocity(Vector2{ -critters[i].GetVelocity().x, critters[i].GetVelocity().y });
+                //}
+                //if (critters[i].GetY() < 0) {
+                //    critters[i].SetY(0);
+                //    critters[i].SetVelocity(Vector2{ critters[i].GetVelocity().x, -critters[i].GetVelocity().y });
+                //}
+                //if (critters[i].GetY() > screenHeight) {
+                //    critters[i].SetY(screenHeight);
+                //    critters[i].SetVelocity(Vector2{ critters[i].GetVelocity().x, -critters[i].GetVelocity().y });
+                //}
+            critters[i].CheckCollision(screenHeight, screenWidth);
+                // kill any critter touching the destroyer
+                // simple circle-to-circle collision check
 
-            float dist = Vector2Distance(critters[i].GetPosition(), destroyer.GetPosition());
-            if (dist < critters[i].GetRadius() + destroyer.GetRadius())
-            {
-                critters[i].Destroy();
-                // this would be the perfect time to put the critter into an object pool //noted
-            }
+                float dist = Vector2Distance(critters[i].GetPosition(), destroyer.GetPosition());
+                if (dist < critters[i].GetRadius() + destroyer.GetRadius())
+                {
+                    critters[i].Destroy();
+                    // this would be the perfect time to put the critter into an object pool //noted
+                }
+          
         }
                 
         // check for critter-on-critter collisions

@@ -1,6 +1,9 @@
 #include "Critter.h"
 
 
+//add a variable for active critters as in sort the array then keep track of the active critters
+
+//notes/todo 
 Critter::Critter()
 {
 	m_position = Vector2{ 0, 0 };
@@ -14,7 +17,7 @@ Critter::~Critter()
 	UnloadTexture(m_texture);
 	m_isLoaded = false;
 }
-
+/*=================================^^structors^^========================================================*/
 void Critter::Init(Vector2 position, Vector2 velocity, float radius, const char* texture)
 {
 	m_position = position;
@@ -27,7 +30,7 @@ void Critter::Init(Vector2 position, Vector2 velocity, float radius, const char*
 }
 
 void Critter::Destroy()
-{
+{ //this has something to do with my object pooling thing 
 	UnloadTexture(m_texture);
 	m_isLoaded = false;
 }
@@ -51,3 +54,26 @@ void Critter::Draw()
 
 	DrawTexture(m_texture, m_position.x, m_position.y, WHITE);
 }
+
+void Critter::CheckCollision(int screenHeight, int screenWidth) {
+
+	if (this->GetX() < 0) {
+		this->SetX(0);
+		this->SetVelocity(Vector2{ -this->GetVelocity().x, this->GetVelocity().y });
+	}	
+	if (this->GetX() > screenWidth) {
+		this->SetX(screenWidth);
+		this->SetVelocity(Vector2{ -this->GetVelocity().x, this->GetVelocity().y });
+	}	
+	if (this->GetY() < 0) {
+		this->SetY(0);
+		this->SetVelocity(Vector2{ this->GetVelocity().x, -this->GetVelocity().y });
+	}	
+	if (this->GetY() > screenHeight) {
+		this->SetY(screenHeight);
+		this->SetVelocity(Vector2{ this->GetVelocity().x, -this->GetVelocity().y });
+	}
+
+
+}
+/*==================================^^Methods^^=================================================================*/
