@@ -76,27 +76,9 @@ int main(int argc, char* argv[])
 
         // update the destroyer
         destroyer.Update(delta);
-        // check each critter against screen bounds 
-        //is this really best way to check collision with the screen
-        //we could make this a function for the Critter class it clutters up the loop fucntion 
-        //if (destroyer.GetX() < 0) {
-        //    destroyer.SetX(0);
-        //    destroyer.SetVelocity(Vector2{ -destroyer.GetVelocity().x, destroyer.GetVelocity().y });
-        //}            
-        //if (destroyer.GetX() > screenWidth) {
-        //    destroyer.SetX(screenWidth);
-        //    destroyer.SetVelocity(Vector2{ -destroyer.GetVelocity().x, destroyer.GetVelocity().y });
-        //}            
-        //if (destroyer.GetY() < 0) {
-        //    destroyer.SetY(0);
-        //    destroyer.SetVelocity(Vector2{ destroyer.GetVelocity().x, -destroyer.GetVelocity().y });
-        //}            
-        //if (destroyer.GetY() > screenHeight) {
-        //    destroyer.SetY(screenHeight);
-        //    destroyer.SetVelocity(Vector2{ destroyer.GetVelocity().x, -destroyer.GetVelocity().y });
-        //}
 
-        destroyer.CheckCollision(screenHeight, screenWidth);
+
+        destroyer.CheckCollisionScreen(screenHeight, screenWidth);
 
         // update the critters
         // (dirty flags will be cleared during update)
@@ -105,27 +87,8 @@ int main(int argc, char* argv[])
             critters[i].Update(delta);
         
            
+            critters[i].CheckCollisionScreen(screenHeight, screenWidth);
 
-
-                // check each critter against screen bounds
-                //again make this a function critter.CheckCollision()
-                //if (critters[i].GetX() < 0) {
-                //    critters[i].SetX(0);
-                //    critters[i].SetVelocity(Vector2{ -critters[i].GetVelocity().x, critters[i].GetVelocity().y });
-                //}
-                //if (critters[i].GetX() > screenWidth) {
-                //    critters[i].SetX(screenWidth);
-                //    critters[i].SetVelocity(Vector2{ -critters[i].GetVelocity().x, critters[i].GetVelocity().y });
-                //}
-                //if (critters[i].GetY() < 0) {
-                //    critters[i].SetY(0);
-                //    critters[i].SetVelocity(Vector2{ critters[i].GetVelocity().x, -critters[i].GetVelocity().y });
-                //}
-                //if (critters[i].GetY() > screenHeight) {
-                //    critters[i].SetY(screenHeight);
-                //    critters[i].SetVelocity(Vector2{ critters[i].GetVelocity().x, -critters[i].GetVelocity().y });
-                //}
-            critters[i].CheckCollision(screenHeight, screenWidth);
                 // kill any critter touching the destroyer
                 // simple circle-to-circle collision check
 
@@ -183,16 +146,17 @@ int main(int argc, char* argv[])
                     // get a position behind the destroyer, and far enough away that the critter won't bump into it again
                     Vector2 pos = destroyer.GetPosition();
                     pos = Vector2Add(pos, Vector2Scale(normal, -50));
-                    // its pretty ineficient to keep reloading textures. ...if only there was something else we could do // good to know //lmao could we just do that dumb ass thing where we hand it off screen or what ever????
+                    // its pretty ineficient to keep reloading textures. ...if only there was something else we could do     // good to know //lmao could we just do that dumb ass thing where we hand it off screen or what ever????
                     critters[i].Init(pos, Vector2Scale(normal, -MAX_VELOCITY), 12, "res/10.png");
                     break;
+
                 }
             }
             nextSpawnPos = destroyer.GetPosition();
         }
 
         // Draw
-        //----------------------------------------------------------------------------------
+        //==========================================================================
         BeginDrawing();
 
         ClearBackground(RAYWHITE);
@@ -211,7 +175,7 @@ int main(int argc, char* argv[])
         
 
         EndDrawing();
-        //----------------------------------------------------------------------------------
+        //==============================================================================
     }
 
     for (int i = 0; i < CRITTER_COUNT; i++)

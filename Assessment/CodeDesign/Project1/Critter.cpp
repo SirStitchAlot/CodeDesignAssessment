@@ -31,8 +31,12 @@ void Critter::Init(Vector2 position, Vector2 velocity, float radius, const char*
 
 void Critter::Destroy()
 { //this has something to do with my object pooling thing 
-	UnloadTexture(m_texture);
+	//UnloadTexture(m_texture);
+	//m_isLoaded = false;
+
+	this->SetX(-100), this->SetY(-100);
 	m_isLoaded = false;
+
 }
 
 void Critter::Update(float dt)
@@ -55,21 +59,21 @@ void Critter::Draw()
 	DrawTexture(m_texture, m_position.x, m_position.y, WHITE);
 }
 
-void Critter::CheckCollision(int screenHeight, int screenWidth) {
+void Critter::CheckCollisionScreen(int screenHeight, int screenWidth) {
 
 	if (this->GetX() < 0) {
 		this->SetX(0);
 		this->SetVelocity(Vector2{ -this->GetVelocity().x, this->GetVelocity().y });
 	}	
-	if (this->GetX() > screenWidth) {
+	else if (this->GetX() > screenWidth) {
 		this->SetX(screenWidth);
 		this->SetVelocity(Vector2{ -this->GetVelocity().x, this->GetVelocity().y });
 	}	
-	if (this->GetY() < 0) {
+	else if (this->GetY() < 0) {
 		this->SetY(0);
 		this->SetVelocity(Vector2{ this->GetVelocity().x, -this->GetVelocity().y });
 	}	
-	if (this->GetY() > screenHeight) {
+	else if (this->GetY() > screenHeight) {
 		this->SetY(screenHeight);
 		this->SetVelocity(Vector2{ this->GetVelocity().x, -this->GetVelocity().y });
 	}

@@ -11,7 +11,7 @@ protected:
 	Vector2 m_velocity;
 	float m_radius;
 
-	Texture2D m_texture;
+	Texture2D  m_texture;
 
 	bool m_isLoaded;
 	bool m_isDirty;		// indicates if we've already processed a collision response for this critter
@@ -24,7 +24,7 @@ public:
 	void Destroy();
 	void Update(float dt);
 	void Draw();
-	void CheckCollision(int screenHeight, int screenWidth);
+	void CheckCollisionScreen(int screenHeight, int screenWidth);
 /*================================================^^Method declarations^^============================================================*/
 	float GetX() { return m_position.x; }
 	float GetY() { return m_position.y; }
