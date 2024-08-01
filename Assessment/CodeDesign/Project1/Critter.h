@@ -15,6 +15,7 @@ protected:
 
 	bool m_isLoaded;
 	bool m_isDirty;		// indicates if we've already processed a collision response for this critter
+	
 /*===================================================^^Properties^^==================================================*/
 public:
 	Critter();
@@ -25,6 +26,7 @@ public:
 	void Update(float dt);
 	void Draw();
 	void CheckCollisionScreen(int screenHeight, int screenWidth);
+	void Respawn(Vector2 position, Vector2 velocity);
 /*================================================^^Method declarations^^============================================================*/
 	float GetX() { return m_position.x; }
 	float GetY() { return m_position.y; }
@@ -43,6 +45,8 @@ public:
 	void SetDirty() { m_isDirty = true; }
 
 	bool IsDead() { return m_isLoaded == false; }
+	void SetAlive() { this->m_isLoaded = true; }
+	
 /*==========================================^^method definations^^================================================================*/
 };
 

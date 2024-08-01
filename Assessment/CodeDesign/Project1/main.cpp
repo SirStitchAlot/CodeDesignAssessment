@@ -21,6 +21,8 @@ int main(int argc, char* argv[])
     //--------------------------------------------------------------------------------------
     int screenWidth = 800;
     int screenHeight = 450;  //change screen size so the critters can move around better
+    
+    
 
     InitWindow(screenWidth, screenHeight, "AHHAHAHAHAHAHAHA GOOD LUCK WE ARE FAILING AHAHAHHA");
 
@@ -30,11 +32,15 @@ int main(int argc, char* argv[])
     srand(time(NULL));
 
 
-    Critter critters[50]; 
+    Critter critters[5]; 
 
     // create some critters
-    const int CRITTER_COUNT = 50; //was 50 just making it a large number for testing //made it max possible to better test out performance
-    const int MAX_VELOCITY = 80;
+    const int CRITTER_COUNT = 5; //was 50 just making it a large number for testing //made it max possible to better test out performance
+    const int MAX_VELOCITY = 160;
+    //this will be used to keep track of our sorted array object pool 
+    int  Active_Count = CRITTER_COUNT;
+
+
 
     for (int i = 0; i < CRITTER_COUNT; i++)
     {
@@ -62,7 +68,7 @@ int main(int argc, char* argv[])
     float timer = 1; // wait are these used for ???
     Vector2 nextSpawnPos = destroyer.GetPosition();
 
-
+    
 
     // Main game loop
     while (!WindowShouldClose())    // Detect window close button or ESC key
@@ -82,12 +88,12 @@ int main(int argc, char* argv[])
 
         // update the critters
         // (dirty flags will be cleared during update)
-        for (int i = 0; i < CRITTER_COUNT; i++)
+        for (int i = 0; i < Active_Count; i++)
         {
-            critters[i].Update(delta);
-        
-           
-            critters[i].CheckCollisionScreen(screenHeight, screenWidth);
+                critters[i].Update(delta);
+
+
+                critters[i].CheckCollisionScreen(screenHeight, screenWidth);
 
                 // kill any critter touching the destroyer
                 // simple circle-to-circle collision check
@@ -95,17 +101,18 @@ int main(int argc, char* argv[])
                 float dist = Vector2Distance(critters[i].GetPosition(), destroyer.GetPosition());
                 if (dist < critters[i].GetRadius() + destroyer.GetRadius())
                 {
+                    --Active_Count;
                     critters[i].Destroy();
                     // this would be the perfect time to put the critter into an object pool //noted
                 }
-          
+            
         }
                 
         // check for critter-on-critter collisions
-        for (int i = 0; i < CRITTER_COUNT; i++)
+        for (int i = 0; i < Active_Count; i++)
         {            
             for (int j = 0; j < CRITTER_COUNT; j++){
-                if (i == j || critters[i].IsDirty()) // note: the other critter (j) could be dirty - that's OK
+                if (i <= j || critters[i].IsDirty()) // note: the other critter (j) could be dirty - that's OK
                     continue;
                 // check every critter against every other critter
                 float dist = Vector2Distance(critters[i].GetPosition(), critters[j].GetPosition());
@@ -146,14 +153,17 @@ int main(int argc, char* argv[])
                     // get a position behind the destroyer, and far enough away that the critter won't bump into it again
                     Vector2 pos = destroyer.GetPosition();
                     pos = Vector2Add(pos, Vector2Scale(normal, -50));
-                    // its pretty ineficient to keep reloading textures. ...if only there was something else we could do     // good to know //lmao could we just do that dumb ass thing where we hand it off screen or what ever????
+                    // its pretty ineficient to keep reloading textures. ...if only there was something else we could do 
                     critters[i].Init(pos, Vector2Scale(normal, -MAX_VELOCITY), 12, "res/10.png");
                     break;
 
+                    //this will be used for future object pool count just gotta figure it out 
+                    Active_Count++;
                 }
             }
             nextSpawnPos = destroyer.GetPosition();
         }
+     
 
         // Draw
         //==========================================================================
