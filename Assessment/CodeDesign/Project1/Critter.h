@@ -13,7 +13,19 @@ protected:
 
 	Texture2D  m_texture;
 
-	bool m_isLoaded;
+	bool m_isAlive;    //I'm thinking about how this variable works since we wont be reloading the critter 
+						//{
+						// So we teleport it off screen and then remove all collision and and movement checks but we still draw the texture
+						// 
+						// 
+						// 
+						// 
+						// 
+						// }
+							
+
+
+
 	bool m_isDirty;		// indicates if we've already processed a collision response for this critter
 	
 /*===================================================^^Properties^^==================================================*/
@@ -26,6 +38,9 @@ public:
 	void Update(float dt);
 	void Draw();
 	void CheckCollisionScreen(int screenHeight, int screenWidth);
+	//void;
+
+
 	void Respawn(Vector2 position, Vector2 velocity);
 /*================================================^^Method declarations^^============================================================*/
 	float GetX() { return m_position.x; }
@@ -44,9 +59,8 @@ public:
 	bool IsDirty() { return m_isDirty; }
 	void SetDirty() { m_isDirty = true; }
 
-	bool IsDead() { return m_isLoaded == false; }
-	void SetAlive() { this->m_isLoaded = true; }
-	
+	bool IsDead() { return m_isAlive == false; } //we will stop unloading the texture so should i change this? 
+	bool SetDead() { return m_isAlive = false; }
 /*==========================================^^method definations^^================================================================*/
 };
 

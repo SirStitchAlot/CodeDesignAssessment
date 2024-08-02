@@ -14,6 +14,7 @@
 #include "raymath.h"
 #include <random>
 #include <time.h>
+#include <iostream>
 
 int main(int argc, char* argv[])
 {
@@ -32,13 +33,13 @@ int main(int argc, char* argv[])
     srand(time(NULL));
 
 
-    Critter critters[5]; 
+    Critter critters[50]; 
 
     // create some critters
-    const int CRITTER_COUNT = 5; //was 50 just making it a large number for testing //made it max possible to better test out performance
-    const int MAX_VELOCITY = 160;
+    const int CRITTER_COUNT = 50; //was 50 just making it a large number for testing //made it max possible to better test out performance
+    const int MAX_VELOCITY = 80;
     //this will be used to keep track of our sorted array object pool 
-    int  Active_Count = CRITTER_COUNT;
+    int  Active_Count = CRITTER_COUNT; //all critters will be active at the start of the game
 
 
 
@@ -88,8 +89,12 @@ int main(int argc, char* argv[])
 
         // update the critters
         // (dirty flags will be cleared during update)
-        for (int i = 0; i < Active_Count; i++)
+        for (int i = 0; i < CRITTER_COUNT; i++)
         {
+
+            if (!critters[i].IsDead()) {
+
+
                 critters[i].Update(delta);
 
 
@@ -101,40 +106,54 @@ int main(int argc, char* argv[])
                 float dist = Vector2Distance(critters[i].GetPosition(), destroyer.GetPosition());
                 if (dist < critters[i].GetRadius() + destroyer.GetRadius())
                 {
-                    --Active_Count;
                     critters[i].Destroy();
-                    // this would be the perfect time to put the critter into an object pool //noted
+
+                    std::cout << "arggghhh im dead" << std::endl;
+                    Active_Count--;
+                    // this would be the perfect time to put the critter into an object pool
                 }
+            }
             
         }
                 
         // check for critter-on-critter collisions
-        for (int i = 0; i < Active_Count; i++)
-        {            
-            for (int j = 0; j < CRITTER_COUNT; j++){
-                if (i <= j || critters[i].IsDirty()) // note: the other critter (j) could be dirty - that's OK
-                    continue;
+        for (int i = 0; i < CRITTER_COUNT; i++)
+        {
+            //check if first critter so we don't need to worry about checking it
+            if (critters[i].IsDead()) { critters[i].IsDirty(); break; }
+            
+            std::cout << "first checkpassed" << std::endl;
+
+            
+            for (int j = 1; j < CRITTER_COUNT; j++) {
+                if (i == j || critters[i].IsDirty()) // note: the other critter (j) could be dirty - that's OK
+                //    std::cout << "second checkpassed" << std::endl;
+                continue;
                 // check every critter against every other critter
+
                 float dist = Vector2Distance(critters[i].GetPosition(), critters[j].GetPosition());
                 if (dist < critters[i].GetRadius() + critters[j].GetRadius())
                 {
+                    std::cout << "third checkpassed" << std::endl;
+                    std::cout << "critterbounce" << std::endl;
                     // collision!
                     // do math to get critters bouncing
-                    Vector2 normal = Vector2Normalize( Vector2Subtract(critters[j].GetPosition(), critters[i].GetPosition()));
+                    Vector2 normal = Vector2Normalize(Vector2Subtract(critters[j].GetPosition(), critters[i].GetPosition()));
 
                     // not even close to real physics, but fine for our needs
                     critters[i].SetVelocity(Vector2Scale(normal, -MAX_VELOCITY));
                     // set the critter to *dirty* so we know not to process any more collisions on it
-                    critters[i].SetDirty(); 
+                    critters[i].SetDirty();
+
 
                     // we still want to check for collisions in the case where 1 critter is dirty - so we need a check 
                     // to make sure the other critter is clean before we do the collision response
-                    if (!critters[j].IsDirty()) {
-                        critters[j].SetVelocity(Vector2Scale(normal, MAX_VELOCITY));
-                        critters[j].SetDirty();
-                    }
-                    break;
+                    if (critters[j].IsDirty()) { break; }
+
+                    critters[j].SetVelocity(Vector2Scale(normal, MAX_VELOCITY));
+                    critters[j].SetDirty();
                 }
+
             }
         }
 
@@ -143,7 +162,7 @@ int main(int argc, char* argv[])
         {
             timer = 1;
 
-            // find any dead critters and spit them out (respawn)
+             //find any dead critters and spit them out (respawn)
             for (int i = 0; i < CRITTER_COUNT; i++)
             {
                 if (critters[i].IsDead())
@@ -154,9 +173,9 @@ int main(int argc, char* argv[])
                     Vector2 pos = destroyer.GetPosition();
                     pos = Vector2Add(pos, Vector2Scale(normal, -50));
                     // its pretty ineficient to keep reloading textures. ...if only there was something else we could do 
-                    critters[i].Init(pos, Vector2Scale(normal, -MAX_VELOCITY), 12, "res/10.png");
+                    critters[i].Respawn(pos, Vector2Scale(normal, -MAX_VELOCITY));
                     break;
-
+                    
                     //this will be used for future object pool count just gotta figure it out 
                     Active_Count++;
                 }
@@ -185,7 +204,7 @@ int main(int argc, char* argv[])
         
 
         EndDrawing();
-        //==============================================================================
+     //==============================================================================
     }
 
     for (int i = 0; i < CRITTER_COUNT; i++)

@@ -9,13 +9,13 @@ Critter::Critter()
 	m_position = Vector2{ 0, 0 };
 	m_velocity = Vector2{ 0, 0 };
 	m_radius = 0;
-	m_isLoaded = false;
+	m_isAlive = false;
 }
 
 Critter::~Critter()
 {
 	UnloadTexture(m_texture);
-	m_isLoaded = false;
+	m_isAlive = false;
 }
 /*=================================^^structors^^========================================================*/
 void Critter::Init(Vector2 position, Vector2 velocity, float radius, const char* texture)
@@ -26,23 +26,19 @@ void Critter::Init(Vector2 position, Vector2 velocity, float radius, const char*
 	
 	m_texture = LoadTexture(texture);	
 
-	m_isLoaded = true;
+	m_isAlive = true;
 }
 
 void Critter::Destroy()
 { //this has something to do with my object pooling thing 
-	UnloadTexture(m_texture);
-	m_isLoaded = false;
-
-	//this->SetX(50), this->SetY(50);
-
+	SetX(400);
+	SetY(200);
+	SetVelocity(Vector2Subtract(GetVelocity(),GetVelocity()));
+	m_isAlive = false;
 }
 
 void Critter::Update(float dt)
 {
-	if (m_isLoaded == false)
-		return;
-
 	m_position.x += m_velocity.x * dt;
 	m_position.y += m_velocity.y * dt;
 
@@ -52,8 +48,7 @@ void Critter::Update(float dt)
 
 void Critter::Draw()
 {
-	if (m_isLoaded == false)
-		return;
+	
 
 	DrawTexture(m_texture, m_position.x, m_position.y, WHITE);
 }
@@ -81,6 +76,9 @@ void Critter::CheckCollisionScreen(int screenHeight, int screenWidth) {
 }
 
 void Critter::Respawn(Vector2 position, Vector2 velocity) {
+
+
+	m_isAlive = true;
 
 	m_position = position;
 	m_velocity = velocity;
