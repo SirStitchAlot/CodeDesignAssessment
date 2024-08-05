@@ -33,10 +33,10 @@ int main(int argc, char* argv[])
     srand(time(NULL));
 
 
-    Critter critters[50]; 
+    Critter critters[2]; 
 
     // create some critters
-    const int CRITTER_COUNT = 50; //was 50 just making it a large number for testing //made it max possible to better test out performance
+    const int CRITTER_COUNT = 2; //was 50 just making it a large number for testing //made it max possible to better test out performance
     const int MAX_VELOCITY = 80;
     //this will be used to keep track of our sorted array object pool 
     int  Active_Count = CRITTER_COUNT; //all critters will be active at the start of the game
@@ -106,8 +106,9 @@ int main(int argc, char* argv[])
                 float dist = Vector2Distance(critters[i].GetPosition(), destroyer.GetPosition());
                 if (dist < critters[i].GetRadius() + destroyer.GetRadius())
                 {
+                    std::cout << i << "is being deactivated" << Active_Count - 1 << "is replacing it" << std::endl;
                     critters[i].Destroy();
-
+                    critters[i].DeactivateCritter(critters[Active_Count-1]);
                     std::cout << "arggghhh im dead" << std::endl;
                     Active_Count--;
                     // this would be the perfect time to put the critter into an object pool
@@ -117,25 +118,26 @@ int main(int argc, char* argv[])
         }
                 
         // check for critter-on-critter collisions
-        for (int i = 0; i < CRITTER_COUNT; i++)
+        for (int i = 0; i < Active_Count; i++)
         {
             //check if first critter so we don't need to worry about checking it
-            if (critters[i].IsDead()) { critters[i].IsDirty(); break; }
+            if (critters[i].IsDead()) { break; }
             
-            std::cout << "first checkpassed" << std::endl;
+         
 
             
-            for (int j = 1; j < CRITTER_COUNT; j++) {
-                if (i == j || critters[i].IsDirty()) // note: the other critter (j) could be dirty - that's OK
-                //    std::cout << "second checkpassed" << std::endl;
-                continue;
+            for (int j = 1; j < Active_Count; j++) {
+              
+                if (i == j || critters[i].IsDirty()) { break; } //we do >= because if I is higher then j then that critter has already been checked
+
+               
+               
                 // check every critter against every other critter
 
                 float dist = Vector2Distance(critters[i].GetPosition(), critters[j].GetPosition());
                 if (dist < critters[i].GetRadius() + critters[j].GetRadius())
                 {
-                    std::cout << "third checkpassed" << std::endl;
-                    std::cout << "critterbounce" << std::endl;
+                   
                     // collision!
                     // do math to get critters bouncing
                     Vector2 normal = Vector2Normalize(Vector2Subtract(critters[j].GetPosition(), critters[i].GetPosition()));
@@ -163,7 +165,7 @@ int main(int argc, char* argv[])
             timer = 1;
 
              //find any dead critters and spit them out (respawn)
-            for (int i = 0; i < CRITTER_COUNT; i++)
+            for (int i = Active_Count; i < CRITTER_COUNT+1; i++)
             {
                 if (critters[i].IsDead())
                 {
@@ -191,10 +193,14 @@ int main(int argc, char* argv[])
         ClearBackground(RAYWHITE);
 
         // draw the critters
-        for (int i = 0; i < CRITTER_COUNT; i++)
-        {
-            critters[i].Draw();
+        if (!critters->IsDead()) {
+            for (int i = 0; i < CRITTER_COUNT; i++)
+            {
+                critters[i].Draw();
+
+            }
         }
+    
         // draw the destroyer
         // (if you're wondering why it looks a little odd when sometimes critters are destroyed when they're not quite touching the 
         // destroyer, it's because the origin is at the top-left. ...you could fix that!)
@@ -209,7 +215,7 @@ int main(int argc, char* argv[])
 
     for (int i = 0; i < CRITTER_COUNT; i++)
     {
-        critters[i].Destroy();
+        UnloadTexture(critters[i].GetTexture());
     }
 
     // De-Initialization

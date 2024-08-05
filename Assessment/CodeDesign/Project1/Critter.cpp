@@ -12,8 +12,19 @@ Critter::Critter()
 	m_isAlive = false;
 }
 
+Critter::Critter(Critter& critter){
+
+	m_radius = critter.m_radius;
+	m_texture = critter.m_texture;
+	m_isAlive = critter.m_isAlive;
+	m_isDirty = critter.m_isDirty;
+	m_position = critter.m_position;
+	m_velocity = critter.m_velocity;
+}
+
 Critter::~Critter()
 {
+
 	UnloadTexture(m_texture);
 	m_isAlive = false;
 }
@@ -35,6 +46,7 @@ void Critter::Destroy()
 	SetY(200);
 	SetVelocity(Vector2Subtract(GetVelocity(),GetVelocity()));
 	m_isAlive = false;
+
 }
 
 void Critter::Update(float dt)
@@ -85,4 +97,24 @@ void Critter::Respawn(Vector2 position, Vector2 velocity) {
 
 
 }
+
+
+
+void Critter::DeactivateCritter( Critter lastActiveCritter){
+
+	Critter temp(*this);
+	*this =lastActiveCritter;
+	lastActiveCritter = temp;
+}
+
 /*==================================^^Methods^^=================================================================*/
+
+void Critter::operator=(Critter rhs)
+{
+	m_radius = rhs.m_radius;
+	m_texture = rhs.m_texture;
+	m_isAlive = rhs.m_isAlive;
+	m_isDirty = rhs.m_isDirty;
+	m_position = rhs.m_position;
+	
+}

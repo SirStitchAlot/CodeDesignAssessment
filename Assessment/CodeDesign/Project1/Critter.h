@@ -31,6 +31,9 @@ protected:
 /*===================================================^^Properties^^==================================================*/
 public:
 	Critter();
+
+	Critter(Critter &critter);
+
 	~Critter();
 /*===============================================^^Structors^^==========================================================*/
 	void Init(Vector2 position, Vector2 velocity, float radius, const char* texture);
@@ -38,7 +41,7 @@ public:
 	void Update(float dt);
 	void Draw();
 	void CheckCollisionScreen(int screenHeight, int screenWidth);
-	//void;
+	void DeactivateCritter( Critter lastActiveCritter);
 
 
 	void Respawn(Vector2 position, Vector2 velocity);
@@ -61,6 +64,12 @@ public:
 
 	bool IsDead() { return m_isAlive == false; } //we will stop unloading the texture so should i change this? 
 	bool SetDead() { return m_isAlive = false; }
+	Texture2D GetTexture() { return m_texture; }
 /*==========================================^^method definations^^================================================================*/
+
+
+
+
+	void  operator =  (Critter rhs);
 };
 
