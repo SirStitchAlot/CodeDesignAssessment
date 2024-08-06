@@ -41,9 +41,6 @@ public:
 	void Update(float dt);
 	void Draw();
 	void CheckCollisionScreen(int screenHeight, int screenWidth);
-	void DeactivateCritter( Critter lastActiveCritter);
-
-
 	void Respawn(Vector2 position, Vector2 velocity);
 /*================================================^^Method declarations^^============================================================*/
 	float GetX() { return m_position.x; }
@@ -70,6 +67,6 @@ public:
 
 
 
-	void  operator =  (Critter rhs);
+	
 };
 

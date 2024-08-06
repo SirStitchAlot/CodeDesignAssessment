@@ -100,21 +100,5 @@ void Critter::Respawn(Vector2 position, Vector2 velocity) {
 
 
 
-void Critter::DeactivateCritter( Critter lastActiveCritter){
-
-	Critter temp(*this);
-	*this =lastActiveCritter;
-	lastActiveCritter = temp;
-}
 
 /*==================================^^Methods^^=================================================================*/
-
-void Critter::operator=(Critter rhs)
-{
-	m_radius = rhs.m_radius;
-	m_texture = rhs.m_texture;
-	m_isAlive = rhs.m_isAlive;
-	m_isDirty = rhs.m_isDirty;
-	m_position = rhs.m_position;
-	
-}
