@@ -121,14 +121,14 @@ int main(int argc, char* argv[])
         for (int i = 0; i < CRITTER_COUNT; i++)
         {
             //check if first critter so we don't need to worry about checking it
-            if (critters[i].IsDead()) { break; }
+          //  if (critters[i].IsDead()) { break; }
             
          
 
             
             for (int j = 1; j < CRITTER_COUNT; j++) {
               
-                if (i == j || critters[i].IsDirty()) { break; } //we do >= because if I is higher then j then that critter has already been checked
+                if (i == j || critters[i].IsDirty()) { break; } 
 
                
                
@@ -165,7 +165,7 @@ int main(int argc, char* argv[])
             timer = 1;
 
              //find any dead critters and spit them out (respawn)
-            for (int i = CRITTER_COUNT; i < CRITTER_COUNT+1; i++)
+            for (int i = 0; i < CRITTER_COUNT+1; i++)
             {
                 if (critters[i].IsDead())
                 {
@@ -193,13 +193,12 @@ int main(int argc, char* argv[])
         ClearBackground(RAYWHITE);
 
         // draw the critters
-        if (!critters->IsDead()) {
+      
             for (int i = 0; i < CRITTER_COUNT; i++)
             {
-                critters[i].Draw();
-
+                if (!critters[i].IsDead()) { critters[i].Draw();}
             }
-        }
+        
     
         // draw the destroyer
         // (if you're wondering why it looks a little odd when sometimes critters are destroyed when they're not quite touching the 
