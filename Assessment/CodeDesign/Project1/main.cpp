@@ -23,11 +23,8 @@ int main(int argc, char* argv[])
     int screenWidth = 800;
     int screenHeight = 450;  //change screen size so the critters can move around better
     
-    
-
     InitWindow(screenWidth, screenHeight, "AHHAHAHAHAHAHAHA GOOD LUCK WE ARE FAILING AHAHAHHA");
 
-    
     //--------------------------------------------------------------------------------------
 
     srand(time(NULL));
@@ -119,25 +116,17 @@ int main(int argc, char* argv[])
                 
         // check for critter-on-critter collisions
         for (int i = 0; i < CRITTER_COUNT; i++)
-        {
-            //check if first critter so we don't need to worry about checking it
-          //  if (critters[i].IsDead()) { break; }
-            
-         
-
-            
+        {   
             for (int j = 1; j < CRITTER_COUNT; j++) {
               
                 if (i == j || critters[i].IsDirty()) { break; } 
 
-               
-               
                 // check every critter against every other critter
 
                 float dist = Vector2Distance(critters[i].GetPosition(), critters[j].GetPosition());
+
                 if (dist < critters[i].GetRadius() + critters[j].GetRadius())
                 {
-                   
                     // collision!
                     // do math to get critters bouncing
                     Vector2 normal = Vector2Normalize(Vector2Subtract(critters[j].GetPosition(), critters[i].GetPosition()));
@@ -147,7 +136,6 @@ int main(int argc, char* argv[])
                     // set the critter to *dirty* so we know not to process any more collisions on it
                     critters[i].SetDirty();
 
-
                     // we still want to check for collisions in the case where 1 critter is dirty - so we need a check 
                     // to make sure the other critter is clean before we do the collision response
                     if (critters[j].IsDirty()) { break; }
@@ -155,7 +143,6 @@ int main(int argc, char* argv[])
                     critters[j].SetVelocity(Vector2Scale(normal, MAX_VELOCITY));
                     critters[j].SetDirty();
                 }
-
             }
         }
 
@@ -178,14 +165,13 @@ int main(int argc, char* argv[])
                     critters[i].Respawn(pos, Vector2Scale(normal, -MAX_VELOCITY));
                     break;
                     
-                    //this will be used for future object pool count just gotta figure it out 
+                    
                     
                 }
             }
             nextSpawnPos = destroyer.GetPosition();
         }
      
-
         // Draw
         //==========================================================================
         BeginDrawing();
@@ -199,10 +185,7 @@ int main(int argc, char* argv[])
                 if (!critters[i].IsDead()) { critters[i].Draw();}
             }
         
-    
         // draw the destroyer
-        // (if you're wondering why it looks a little odd when sometimes critters are destroyed when they're not quite touching the 
-        // destroyer, it's because the origin is at the top-left. ...you could fix that!)
         destroyer.Draw();
 
         DrawFPS(10, 10);
