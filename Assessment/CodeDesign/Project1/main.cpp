@@ -29,15 +29,12 @@ int main(int argc, char* argv[])
 
     srand(time(NULL));
 
-
-    Critter critters[50]; 
-
     // create some critters
     const int CRITTER_COUNT = 50; //was 50 just making it a large number for testing //made it max possible to better test out performance
     const int MAX_VELOCITY = 80;
     //this will be used to keep track of our sorted array object pool 
   
-
+    Critter critters[CRITTER_COUNT];
 
 
     for (int i = 0; i < CRITTER_COUNT; i++)
