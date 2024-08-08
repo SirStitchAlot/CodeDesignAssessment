@@ -34,6 +34,7 @@ void Critter::Init(Vector2 position, Vector2 velocity, float radius, const char*
 	m_velocity = velocity;
 	m_radius = radius;
 	
+
 	m_texture = LoadTexture(texture);	
 
 	m_isAlive = true;

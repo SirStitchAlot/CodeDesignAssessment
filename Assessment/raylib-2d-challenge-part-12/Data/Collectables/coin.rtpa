@@ -1,0 +1,15 @@
+#
+# rTexPacker atlas descriptor file (v2.0)
+#
+# Number of packed sprites:     6
+#
+# Atlas info:    a <imagePath> <width> <height> <spriteCount> <isFont> <fontSize>
+# Sprite info:   s <nameId> <originX> <originY> <positionX> <positionY> <sourceWidth> <sourceHeight> <padding> <trimmed> <trimRecX> <trimRecY> <trimRecWidth> <trimRecHeight>
+#
+a coin.png 128 128 6 0 32
+s coin_default_005 28 32 0 0 56 64 0 1 0 0 56 64
+s coin_default_000 88 32 56 0 64 64 0 1 0 0 64 64
+s coin_default_001 32 96 0 64 56 64 0 1 0 0 56 64
+s coin_default_002 71 96 56 64 30 64 0 1 0 0 30 64
+s coin_default_003 91 96 86 64 10 64 0 1 0 0 10 64
+s coin_default_004 111 96 96 64 30 64 0 1 0 0 30 64

@@ -1,0 +1,78 @@
+{ "columns":0,
+ "grid":
+    {
+     "height":1,
+     "orientation":"orthogonal",
+     "width":1
+    },
+ "margin":0,
+ "name":"Environment Props",
+ "spacing":0,
+ "tilecount":10,
+ "tiledversion":"1.9.0",
+ "tileheight":480,
+ "tiles":[
+        {
+         "id":0,
+         "image":"Environment Props\/Village Set_Environment - Tree 01.png",
+         "imageheight":480,
+         "imagewidth":480
+        }, 
+        {
+         "id":1,
+         "image":"Environment Props\/Village Set_Environment - Tree 02.png",
+         "imageheight":480,
+         "imagewidth":480
+        }, 
+        {
+         "id":2,
+         "image":"Environment Props\/Village Set_Environment - Tree 03.png",
+         "imageheight":480,
+         "imagewidth":480
+        }, 
+        {
+         "id":3,
+         "image":"Environment Props\/Village Set_Environment - Grass_01-23.png",
+         "imageheight":64,
+         "imagewidth":128
+        }, 
+        {
+         "id":4,
+         "image":"Environment Props\/Village Set_Environment - Grass_01-24.png",
+         "imageheight":64,
+         "imagewidth":128
+        }, 
+        {
+         "id":5,
+         "image":"Environment Props\/Village Set_Environment - Grass_03     .png",
+         "imageheight":128,
+         "imagewidth":128
+        }, 
+        {
+         "id":6,
+         "image":"Environment Props\/Village Set_Environment - Plant 01.png",
+         "imageheight":128,
+         "imagewidth":128
+        }, 
+        {
+         "id":7,
+         "image":"Environment Props\/Village Set_Environment - Plant 02.png",
+         "imageheight":128,
+         "imagewidth":128
+        }, 
+        {
+         "id":8,
+         "image":"Environment Props\/Village Set_Environment - Plant 03.png",
+         "imageheight":128,
+         "imagewidth":128
+        }, 
+        {
+         "id":9,
+         "image":"Environment Props\/Village Set_Environment - Plant Pot 04.png",
+         "imageheight":256,
+         "imagewidth":256
+        }],
+ "tilewidth":480,
+ "type":"tileset",
+ "version":"1.8"
+}

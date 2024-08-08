@@ -1,0 +1,89 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "file.lastUsedOpenFilter": "All Files (*)",
+    "fileStates": {
+        "": {
+            "scaleInDock": 1
+        },
+        "#Ground": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1
+        },
+        "Environment Props.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Foreground.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Ground.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Level 1.tmx": {
+            "scale": 1,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": -915,
+                "y": 574
+            }
+        },
+        "Level 1.tmx#Ground": {
+            "dynamicWrapping": false
+        },
+        "Level 1.tmx#Village Set_Platformer - Ground 01": {
+            "dynamicWrapping": false,
+            "scaleInEditor": 1
+        },
+        "Level 1.tmx#Village Set_Platformer - Ground 02": {
+            "dynamicWrapping": true
+        },
+        "Props.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Village.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        }
+    },
+    "last.externalTilesetPath": "D:/Users/Hans de Ruiter/Development/Games/tiled_playground",
+    "last.imagePath": "D:/Users/Hans de Ruiter/Development/Games/tiled_playground/Foreground and Background",
+    "map.fixedSize": true,
+    "map.height": 8,
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 128,
+    "map.tileWidth": 128,
+    "map.width": 120,
+    "openFiles": [
+    ],
+    "project": "level1.tiled-project",
+    "recentFiles": [
+        "Foreground.tsx",
+        "Props.tsx",
+        "Village.tsx",
+        "Ground.tsx",
+        "Level 1.tmx",
+        "Environment Props.tsx"
+    ],
+    "tileset.embedInMap": false,
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 128,
+        "width": 128
+    },
+    "tileset.type": 0
+}

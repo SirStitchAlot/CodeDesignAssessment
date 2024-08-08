@@ -1,0 +1,10 @@
+
+doc/.vscode/
+
+cmake-build-debug/
+
+.idea/
+
+cmake-build-minsizerel/
+
+.DS_Store

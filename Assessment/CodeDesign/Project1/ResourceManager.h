@@ -12,8 +12,8 @@ class ResourceManager
 
 /*=Structors==================================================================================================*/
 public:
-
-	ResourceManager(const ResourceManager& other)=delete;
+	//resource managers shouldn't be copeid
+	ResourceManager(const ResourceManager& other) = delete; //I seriously dont get the point of these???
 
 	ResourceManager(ResourceManager&& other) = delete;
 
@@ -24,8 +24,6 @@ public:
 			delete[] T;
 			T = nullptr;
 		}
-	
-	
 	}
 
 /*=Properties==================================================================================================================*/

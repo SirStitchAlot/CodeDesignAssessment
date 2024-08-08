@@ -40,9 +40,6 @@ public:
 	const char getFilename() {return m_filename;}
 
 
-
-
-
 /*=Funnies======================================================*/
 
 
