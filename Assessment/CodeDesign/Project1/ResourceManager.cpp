@@ -1,45 +1,22 @@
-#include "Game.h"
+#include "ResourceManager.h"
 
 
 /*=todo/notes===================================================================================*/
 
-//*fill out the the definations of these funcitons 
-
-//figure out what things i should get lmao 
-
+//I used a guide for this class, the resource manager is not thread-safe
+//Think im just gonna do everything in the header
 
 
 
 /*=Structors==================================================================================================*/
-Game::Game() {};
 
-Game::~Game() {}
 
 
 /*=methods======================================================================================================*/
 
-void Game::Init() {
 
 
 
 
-
-}
-
-void Game::Shutdown() {
-
-
-
-
-}
-
-void Game::Update() {
-
-
-}
-
-void Game::Draw() {
-
-}
 
 /*=Funnies======================================================*/
