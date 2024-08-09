@@ -12,34 +12,43 @@ class ResourceManager
 
 /*=Structors==================================================================================================*/
 public:
-	//resource managers shouldn't be copeid
-	ResourceManager(const ResourceManager& other) = delete; //I seriously dont get the point of these???
 
-	ResourceManager(ResourceManager&& other) = delete;
-
-	ResourceManager& operator=(const ResourceManager& other) = delete;
-
-	ResourceManager();
+	ResourceManager() {}; //example one has the constructor as private
 
 	~ResourceManager(){
-		if (T != nullptr) {
-			delete[] T;
-			T = nullptr;
+		if (T != nullptr) {				 //idk if this is needed Lmao
+			delete[] T;					 //idk if this is needed Lmao
+			T = nullptr;				 //idk if this is needed Lmao
 		}
 	}
 
-
-
 /*=Properties====================================================================================================*/
 private:
-	std::vector<std::shared_ptr<Resource<T>>> m_resources; //might have to figure out if i need to move the template
+	//keeps track of the resouces
+	std::vector<std::shared_ptr<Resource<T>>> m_resources; 
 	
 /*=methods======================================================================================================*/
 public:
 
-	void AddResource(Resource TEXTURE) {
+	void load(const char * filename) {
 
+		auto& resourceManager = instance();
+		std::shared_ptr<T> resource;
 
+		//this is where we do checks if the resouce has been loaded already 
+
+		auto resIter = resourceManager.resources.find(filename);   //not entirely sure what this iter is doing
+
+		if (resIter != resourceManager.resources.end()) {
+			//the resource was loaded alreadly 
+			resource = resIter->second.lock();  //wth is this doing lmao!!!!!
+		}
+
+		if (!resource) {
+
+			resource = std::make_shared<T>(filename);
+			ResourceManager.resources[filename] = resource;
+		}
 
 
 
@@ -53,6 +62,11 @@ public:
 
 	int getCount() {m_resources.size();}
 /*=Funnies=====================================================================================================*/
-//hahahahahahaha
+	//resource managers shouldn't be copeid
+	ResourceManager(const ResourceManager& other) = delete;
+
+	ResourceManager(ResourceManager&& other) = delete;
+
+	ResourceManager& operator=(const ResourceManager& other) = delete;
 };
 
