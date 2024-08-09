@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{1baf97e2-5456-4feb-8645-a841c84831a6}</ProjectGuid>
-    <RootNamespace>Project1</RootNamespace>
+    <ProjectGuid>{9010ecac-149f-4705-8629-b3b6bd539c2f}</ProjectGuid>
+    <RootNamespace>RaylibResourcemanager</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -127,14 +127,49 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Critter.cpp" />
-    <ClCompile Include="Resource.cpp" />
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Actor.cpp" />
+    <ClCompile Include="CharacterActor.cpp" />
+    <ClCompile Include="Collectable.cpp" />
+    <ClCompile Include="CommandListener.cpp" />
+    <ClCompile Include="DisplayOverlay.cpp" />
+    <ClCompile Include="DrawPhysics.cpp" />
+    <ClCompile Include="GameOverlay.cpp" />
+    <ClCompile Include="InputHandler.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MainMenuScene.cpp" />
+    <ClCompile Include="PhysicsContactHandler.cpp" />
+    <ClCompile Include="PhysicsObject.cpp" />
+    <ClCompile Include="Scarfy.cpp" />
+    <ClCompile Include="ScarfyScene.cpp" />
+    <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="TextureAtlas.cpp" />
+    <ClCompile Include="TileMap2D.cpp" />
+    <ClCompile Include="TileMap2DLoader.cpp" />
+    <ClCompile Include="TileMap2DScene.cpp" />
+    <ClCompile Include="TrackingCamera2D.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Critter.h" />
-    <ClInclude Include="Resource.h" />
+    <ClInclude Include="Actor.h" />
+    <ClInclude Include="CharacterActor.h" />
+    <ClInclude Include="Collectable.h" />
+    <ClInclude Include="CommandListener.h" />
+    <ClInclude Include="Common.h" />
+    <ClInclude Include="DisplayOverlay.h" />
+    <ClInclude Include="DrawPhysics.h" />
+    <ClInclude Include="GameOverlay.h" />
+    <ClInclude Include="InputHandler.h" />
+    <ClInclude Include="MainMenuScene.h" />
+    <ClInclude Include="PhysicsContactHandler.h" />
+    <ClInclude Include="PhysicsObject.h" />
     <ClInclude Include="ResourceManager.h" />
+    <ClInclude Include="Scarfy.h" />
+    <ClInclude Include="ScarfyScene.h" />
+    <ClInclude Include="Scene.h" />
+    <ClInclude Include="TextureAtlas.h" />
+    <ClInclude Include="TileMap2D.h" />
+    <ClInclude Include="TileMap2DLoader.h" />
+    <ClInclude Include="TileMap2DScene.h" />
+    <ClInclude Include="TrackingCamera2D.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

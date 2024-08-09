@@ -13,19 +13,8 @@ protected:
 
 	Texture2D  m_texture;
 
-	bool m_isAlive;    //I'm thinking about how this variable works since we wont be reloading the critter 
-						//{
-						// So we teleport it off screen and then remove all collision and and movement checks but we still draw the texture
-						// 
-						// 
-						// 
-						// 
-						// 
-						// }
-							
-
-
-
+	bool m_isAlive;    
+						
 	bool m_isDirty;		// indicates if we've already processed a collision response for this critter
 	
 /*===================================================^^Properties^^==================================================*/

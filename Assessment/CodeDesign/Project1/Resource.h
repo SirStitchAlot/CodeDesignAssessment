@@ -8,13 +8,16 @@ class Resource
 /*=todo/notes===================================================================================*/
 
 	//are Resource and Resource manager supposed ot be in the same file???
+	//decent chance i get rid of this lmao 
 
 
 
 /*=Structors==================================================================================================*/
 public:
-	Resource(const std::string& filename) {
+	Resource(const char *filename) {
 		m_filename = filename;
+
+		m_pData->LoadTexture(m_filename);
 	}
 
 	~Resource() {
@@ -23,22 +26,25 @@ public:
 			delete[] T;
 			T = nullptr;
 		}
-	
 	}
 
 
 /*=Properties==================================================================================================================*/
 private:
 	
-	const char m_filename [20];
+	const char* m_filename;
 
-	std::unique_ptr<T> m_pData; ///what is this used for 
+	std::unique_ptr<T> m_pData = Texture2D;
+
+	
 
 
 /*=methods======================================================================================================*/
 public:
-	const char getFilename() {return m_filename;}
+	
+	std::unique_ptr<T> GetUnique_ptr() { return m_pData; }
 
+	const char* getFilename() {return m_filename;}
 
 /*=Funnies======================================================*/
 

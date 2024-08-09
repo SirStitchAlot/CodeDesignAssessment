@@ -7,7 +7,7 @@ template <class T> //????
 
 class ResourceManager
 {
-/*=todo/notes===================================================================================*/
+/*=todo/notes=================================================================================================*/
 //figure out if i need a second class for this lmao 
 
 /*=Structors==================================================================================================*/
@@ -19,6 +19,8 @@ public:
 
 	ResourceManager& operator=(const ResourceManager& other) = delete;
 
+	ResourceManager();
+
 	~ResourceManager(){
 		if (T != nullptr) {
 			delete[] T;
@@ -26,18 +28,31 @@ public:
 		}
 	}
 
-/*=Properties==================================================================================================================*/
+
+
+/*=Properties====================================================================================================*/
 private:
 	std::vector<std::shared_ptr<Resource<T>>> m_resources; //might have to figure out if i need to move the template
 	
 /*=methods======================================================================================================*/
 public:
-	std::shared_ptr < Resource<T>> get(const std::string&) {}  
 
-	void collectGarbage() {}
+	void AddResource(Resource TEXTURE) {
 
-	int getCount() { m_resources.get_count();}
-/*=Funnies======================================================*/
+
+
+
+
+	}
+
+	std::shared_ptr < Resource<T>> get(const char * texture) {
+		
+	}  
+
+	void collectGarbage() {} //yeah idk what this is doing
+
+	int getCount() {m_resources.size();}
+/*=Funnies=====================================================================================================*/
 //hahahahahahaha
 };
 
