@@ -128,13 +128,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Critter.cpp" />
-    <ClCompile Include="Resource.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Critter.h" />
     <ClInclude Include="Resource.h" />
-    <ClInclude Include="ResourceManager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

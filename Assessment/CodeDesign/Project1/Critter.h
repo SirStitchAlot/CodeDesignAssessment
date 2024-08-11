@@ -26,6 +26,7 @@ public:
 	~Critter();
 /*===============================================^^Structors^^==========================================================*/
 	void Init(Vector2 position, Vector2 velocity, float radius, const char* texture);
+	void Init(Vector2 position, Vector2 velocity, float radius); //this will be used fro critters to stop them from loading so many textures
 	void Destroy();
 	void Update(float dt);
 	void Draw();

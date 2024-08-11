@@ -15,7 +15,7 @@
 #include <random>
 #include <time.h>
 #include <iostream>
-
+#include "Resource.h"
 int main(int argc, char* argv[])
 {
     // Initialization
@@ -29,8 +29,15 @@ int main(int argc, char* argv[])
 
     srand(time(NULL));
 
+
+  //this is used to stop duplicate
+    Resource crittersTexture("res/10.png");
+
+  
+
+
     // create some critters
-    const int CRITTER_COUNT = 50; //was 50 just making it a large number for testing //made it max possible to better test out performance
+    const int CRITTER_COUNT = 50; 
     const int MAX_VELOCITY = 80;
     //this will be used to keep track of our sorted array object pool 
   
@@ -48,7 +55,7 @@ int main(int argc, char* argv[])
         critters[i].Init(
             { (float)(5+rand() % (screenWidth-10)), (float)(5+(rand() % screenHeight-10)) },
             velocity,
-            12, "res/10.png");
+            12);
     }
 
     //make destroyer critter
@@ -100,12 +107,8 @@ int main(int argc, char* argv[])
                 float dist = Vector2Distance(critters[i].GetPosition(), destroyer.GetPosition());
                 if (dist < critters[i].GetRadius() + destroyer.GetRadius())
                 {
-                   
                     critters[i].Destroy();
                   
-                    std::cout << "arggghhh im dead" << std::endl;
-                  
-                    // this would be the perfect time to put the critter into an object pool
                 }
             }
             
@@ -177,14 +180,23 @@ int main(int argc, char* argv[])
 
         // draw the critters
       
-            for (int i = 0; i < CRITTER_COUNT; i++)
-            {
-                if (!critters[i].IsDead()) { critters[i].Draw();}
-            }
+        for (int i = 0; i < CRITTER_COUNT; i++)
+        {
+          //  if (!critters[i].IsDead()) { critters[i].Draw(); }
+
+            if (!critters[i].IsDead()){ DrawTexture(crittersTexture.GetTexture(), critters[i].GetX(), critters[i].GetY(), WHITE); }
+                
+
+                
+
+        }
+
+
         
         // draw the destroyer
         destroyer.Draw();
 
+      
         DrawFPS(10, 10);
         
 
@@ -192,10 +204,10 @@ int main(int argc, char* argv[])
      //==============================================================================
     }
 
-    for (int i = 0; i < CRITTER_COUNT; i++)
-    {
-        UnloadTexture(critters[i].GetTexture());
-    }
+    
+        UnloadTexture(crittersTexture.GetTexture());
+        UnloadTexture(destroyer.GetTexture());
+    
 
     // De-Initialization
     //--------------------------------------------------------------------------------------   
