@@ -32,7 +32,7 @@ int main(int argc, char* argv[])
 
   //this is used to stop duplicate
     Resource crittersTexture("res/10.png");
-
+    Resource destroyerTexture("res/9.png");
   
 
 
@@ -65,7 +65,7 @@ int main(int argc, char* argv[])
     // normalize and scale by a random speed
     velocity = Vector2Scale(Vector2Normalize(velocity), MAX_VELOCITY);
     //spawn destroyer at random position 
-    destroyer.Init(Vector2{ (float)(screenWidth >> 1), (float)(screenHeight >> 1) }, velocity, 20, "res/9.png");
+    destroyer.Init(Vector2{ (float)(screenWidth >> 1), (float)(screenHeight >> 1) }, velocity, 20);
 
     float timer = 1; // wait are these used for ???
     Vector2 nextSpawnPos = destroyer.GetPosition();
@@ -182,21 +182,13 @@ int main(int argc, char* argv[])
       
         for (int i = 0; i < CRITTER_COUNT; i++)
         {
-          //  if (!critters[i].IsDead()) { critters[i].Draw(); }
-
-            if (!critters[i].IsDead()){ DrawTexture(crittersTexture.GetTexture(), critters[i].GetX(), critters[i].GetY(), WHITE); }
-                
-
-                
-
+            if (!critters[i].IsDead()) { critters[i].Draw(crittersTexture); }
         }
 
-
+        destroyer.Draw(destroyerTexture);
         
         // draw the destroyer
-        destroyer.Draw();
-
-      
+       
         DrawFPS(10, 10);
         
 
@@ -206,7 +198,7 @@ int main(int argc, char* argv[])
 
     
         UnloadTexture(crittersTexture.GetTexture());
-        UnloadTexture(destroyer.GetTexture());
+        UnloadTexture(destroyerTexture.GetTexture());
     
 
     // De-Initialization

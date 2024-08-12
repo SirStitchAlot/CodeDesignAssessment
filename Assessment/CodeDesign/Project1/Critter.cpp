@@ -15,7 +15,7 @@ Critter::Critter()
 Critter::Critter(Critter& critter){
 
 	m_radius = critter.m_radius;
-	m_texture = critter.m_texture;
+	
 	m_isAlive = critter.m_isAlive;
 	m_isDirty = critter.m_isDirty;
 	m_position = critter.m_position;
@@ -24,21 +24,8 @@ Critter::Critter(Critter& critter){
 
 Critter::~Critter()
 {
-	UnloadTexture(m_texture);
-	m_isAlive = false;
 }
 /*=================================^^structors^^========================================================*/
-void Critter::Init(Vector2 position, Vector2 velocity, float radius, const char* texture)
-{
-	m_position = position;
-	m_velocity = velocity;
-	m_radius = radius;
-	
-
-	m_texture = LoadTexture(texture);	
-
-	m_isAlive = true;
-}
 
 void Critter::Init(Vector2 position, Vector2 velocity, float radius)
 {
@@ -63,9 +50,9 @@ void Critter::Update(float dt)
 }
 
 
-void Critter::Draw()
+void Critter::Draw(Resource texture)
 {
-	DrawTexture(m_texture, m_position.x, m_position.y, WHITE);
+	DrawTexture(texture.GetTexture(), GetX(), GetY(), WHITE);
 }
 
 void Critter::CheckCollisionScreen(int screenHeight, int screenWidth) {

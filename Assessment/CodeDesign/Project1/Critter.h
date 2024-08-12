@@ -3,6 +3,7 @@
 
 #include "raylib.h"
 #include "raymath.h"
+#include "Resource.h"
 
 class Critter
 {
@@ -11,7 +12,7 @@ protected:
 	Vector2 m_velocity;
 	float m_radius;
 
-	Texture2D  m_texture;
+	
 
 	bool m_isAlive;    
 						
@@ -25,11 +26,11 @@ public:
 
 	~Critter();
 /*===============================================^^Structors^^==========================================================*/
-	void Init(Vector2 position, Vector2 velocity, float radius, const char* texture);
+	
 	void Init(Vector2 position, Vector2 velocity, float radius); //this will be used fro critters to stop them from loading so many textures
 	void Destroy();
 	void Update(float dt);
-	void Draw();
+	void Draw(Resource texture);
 	void CheckCollisionScreen(int screenHeight, int screenWidth);
 	void Respawn(Vector2 position, Vector2 velocity);
 /*================================================^^Method declarations^^============================================================*/
@@ -50,8 +51,8 @@ public:
 	void SetDirty() { m_isDirty = true; }
 
 	bool IsDead() { return m_isAlive == false; } //we will stop unloading the texture so should i change this? 
-	bool SetDead() { return m_isAlive = false; }
-	Texture2D GetTexture() { return m_texture; }
+	void SetDead() {  m_isAlive = false; }
+
 /*==========================================^^method definations^^================================================================*/
 
 
