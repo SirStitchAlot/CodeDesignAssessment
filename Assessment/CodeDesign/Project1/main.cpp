@@ -30,7 +30,7 @@ int main(int argc, char* argv[])
     srand(time(NULL));
 
 
-  //this is used to stop duplicate
+  //this is used to stop duplicate texture from being loaded
     Resource crittersTexture("res/10.png");
     Resource destroyerTexture("res/9.png");
   

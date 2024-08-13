@@ -10,16 +10,7 @@ Critter::Critter()
 	m_velocity = Vector2{ 0, 0 };
 	m_radius = 0;
 	m_isAlive = false;
-}
-
-Critter::Critter(Critter& critter){
-
-	m_radius = critter.m_radius;
-	
-	m_isAlive = critter.m_isAlive;
-	m_isDirty = critter.m_isDirty;
-	m_position = critter.m_position;
-	m_velocity = critter.m_velocity;
+	m_isDirty = false;
 }
 
 Critter::~Critter()
