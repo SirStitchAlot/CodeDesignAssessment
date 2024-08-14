@@ -8,11 +8,6 @@ class Resource
 {
 /*=todo/notes===================================================================================*/
 
-	//are Resource and Resource manager supposed ot be in the same file???
-	//decent chance i get rid of this lmao 
-	//if the texture doesnt load properly try adding raymath 
-
-
 /*=Structors==================================================================================================*/
 public:
 	Resource(const char *filename) {

@@ -129,9 +129,11 @@
   <ItemGroup>
     <ClCompile Include="Critter.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="OldCritter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Critter.h" />
+    <ClInclude Include="OldCritter.h" />
     <ClInclude Include="Resource.h" />
   </ItemGroup>
   <ItemGroup>

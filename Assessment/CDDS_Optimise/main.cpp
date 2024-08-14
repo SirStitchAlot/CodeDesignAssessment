@@ -40,7 +40,7 @@ int main(int argc, char* argv[])
     srand(time(NULL));
 
 
-    Critter critters[1000]; 
+    Critter critters[50]; 
 
     // create some critters
     const int CRITTER_COUNT = 50;
