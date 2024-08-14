@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include "raylib.h"
 #include "chrono"
-
+#include "fstream"
 
 
 class testclass {
@@ -17,6 +17,9 @@ public:
 
 
 };
+
+
+std::ofstream MyFile("TestingResults.txt");
 
 int main() {
 
@@ -39,6 +42,8 @@ int main() {
 
 	std::cout << "It took me " << time_span.count() << " seconds.";
 	std::cout << std::endl;
+
+	MyFile << 
 
 	return 0;
 	

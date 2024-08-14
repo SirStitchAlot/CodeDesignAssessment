@@ -52,7 +52,7 @@ namespace UnitTest1
 		//this is testing the old respawn/destroy method 
 		TEST_METHOD(RespawnMethod_ObjectPooling){
 
-			//https://stackoverflow.com/questions/72018799/performance-measurment-in-unit-test look into this for speed measurement
+			MyFile << "this is testing the speed of my object pooling" << std::endl;
 			
 			//this gets the critters ready for the test and should not be included in the time
 
@@ -88,6 +88,7 @@ namespace UnitTest1
 			
 			//starts the timer for new method
 			std::chrono::steady_clock::time_point t1 = std::chrono::steady_clock::now();
+
 			
 			//destroy all the critters
 			for (int i = 0; i < 50; i++)
@@ -118,6 +119,8 @@ namespace UnitTest1
 
 			//comapres the two times for the new method
 			std::chrono::duration<double> NewMethod_time_span = std::chrono::duration_cast<std::chrono::duration<double>>(t2 - t1);
+
+			MyFile << "New Method: " << NewMethod_time_span.count() << std::endl;
 
 //=================================================================================
 		
@@ -179,9 +182,9 @@ namespace UnitTest1
 			std::chrono::duration<double> OldMethod_time_span = std::chrono::duration_cast<std::chrono::duration<double>>(t4 - t3);
 
 
-			MyFile << "this is testing the speed of my object pooling";
-			MyFile << "New Method: " << NewMethod_time_span << std::endl;
-			MyFile << "Old Method: " << OldMethod_time_span << std::endl;
+			
+			
+			MyFile << "Old Method: " << OldMethod_time_span.count() << std::endl;
 
 
 			//sees if the new method is new
@@ -285,8 +288,8 @@ namespace UnitTest1
 
 			
 			MyFile << "This is testing the speed of my resource managment" << std::endl;
-			MyFile << "New Method: " << NewMethod_time_span << std::endl;
-			MyFile << "Old Method: " << OldMethod_time_span << std::endl;
+			MyFile << "New Method: " << NewMethod_time_span.count() << std::endl;
+			MyFile << "Old Method: " << OldMethod_time_span.count() << std::endl;
 
 			Assert::IsTrue(NewMethod_time_span < OldMethod_time_span);
 		}
